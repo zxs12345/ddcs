@@ -16,6 +16,7 @@ import com.ddcs.service.GoodInfoService;
 
 @Controller
 public class Good {
+	
 	@Autowired
 	private GoodInfoService  goodInfoService;
 	
