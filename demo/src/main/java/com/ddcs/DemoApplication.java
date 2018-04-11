@@ -16,6 +16,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 @MapperScan("com.ddcs.dao")
 public class DemoApplication { 
 	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
