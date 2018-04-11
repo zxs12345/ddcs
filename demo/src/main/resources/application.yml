@@ -1,0 +1,11 @@
+server:
+  port: 8081
+  context-path: /ddcs
+spring:
+  thymeleaf:
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template: true
+    cache: false

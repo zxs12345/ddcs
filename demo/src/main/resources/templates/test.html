@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+
+ <div th:text="${info}"></div> 
+<br/>
+<ul>
+<li th:each="li:${couponlist}" th:text="${li}"></li>
+</ul>
+
+
+<ul th:each="img:${info.imgs}">
+<li ><img th:src="'images/'+${img.smallimg}" /></li>
+<li><img th:src="'images/'+${img.midimg} " /></li>
+<li><img th:src="'images/'+${img.bigimg} " /></li>
+
+</ul>
+
+<ul th:each="img:${info.imgs}">
+<li  th:text="'images/'+${img.smallimg}"></li>
+<li  th:text="'images/'+${img.midimg} " ></li>
+<li th:text="'images/'+${img.bigimg} " ></li>
+</ul>
+
+<ul>
+<li ><img src="images/01_small.jpg"/></li>
+
+
+</ul>
+</body>
+</html>

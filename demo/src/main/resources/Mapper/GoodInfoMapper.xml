@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddcs.dao.GoodInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ddcs.domain.GoodInfo">
+    <id column="GoodId" jdbcType="INTEGER" property="goodid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Discount" jdbcType="VARCHAR" property="discount" />
+    <result column="PromotionPice" jdbcType="REAL" property="promotionpice" />
+    <result column="OriginalPrice" jdbcType="REAL" property="originalprice" />
+    <result column="MonthlySales" jdbcType="INTEGER" property="monthlysales" />
+    <result column="TotalSales" jdbcType="INTEGER" property="totalsales" />
+    <result column="TotalEvaluate" jdbcType="INTEGER" property="totalevaluate" />
+    <result column="DetailImg" jdbcType="VARCHAR" property="detailimg" />
+    <result column="Flavor" jdbcType="VARCHAR" property="flavor" />
+    <result column="Packing" jdbcType="VARCHAR" property="packing" />
+    <result column="Coupon" jdbcType="VARCHAR" property="coupon" />
+    <result column="Stock" jdbcType="INTEGER" property="stock" />
+    <collection property="imgs" ofType="com.ddcs.domain.Img" >
+			 <id column="ImgId" jdbcType="INTEGER" property="imgid" />
+    <result column="SmallImg" jdbcType="VARCHAR" property="smallimg" />
+    <result column="MidImg" jdbcType="VARCHAR" property="midimg" />
+    <result column="BigImg" jdbcType="VARCHAR" property="bigimg" />
+    <result column="spId" jdbcType="INTEGER" property="spid" />
+		</collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    GoodId, Name, Discount, PromotionPice, OriginalPrice, MonthlySales, TotalSales, TotalEvaluate, 
+    DetailImg, Flavor, Packing, Coupon,Stock
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+   <!--  <include refid="Base_Column_List" /> -->
+    from goodinfo,img
+    where goodinfo.GoodId=img.spId and  GoodId = #{goodid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goodinfo
+    where GoodId = #{goodid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ddcs.domain.GoodInfo">
+    insert into goodinfo (GoodId, Name, Discount, 
+      PromotionPice, OriginalPrice, MonthlySales, 
+      TotalSales, TotalEvaluate, DetailImg, 
+      Flavor, Packing, Coupon
+      )
+    values (#{goodid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{discount,jdbcType=VARCHAR}, 
+      #{promotionpice,jdbcType=REAL}, #{originalprice,jdbcType=REAL}, #{monthlysales,jdbcType=INTEGER}, 
+      #{totalsales,jdbcType=INTEGER}, #{totalevaluate,jdbcType=INTEGER}, #{detailimg,jdbcType=VARCHAR}, 
+      #{flavor,jdbcType=VARCHAR}, #{packing,jdbcType=VARCHAR}, #{coupon,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddcs.domain.GoodInfo">
+    insert into goodinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        GoodId,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="discount != null">
+        Discount,
+      </if>
+      <if test="promotionpice != null">
+        PromotionPice,
+      </if>
+      <if test="originalprice != null">
+        OriginalPrice,
+      </if>
+      <if test="monthlysales != null">
+        MonthlySales,
+      </if>
+      <if test="totalsales != null">
+        TotalSales,
+      </if>
+      <if test="totalevaluate != null">
+        TotalEvaluate,
+      </if>
+      <if test="detailimg != null">
+        DetailImg,
+      </if>
+      <if test="flavor != null">
+        Flavor,
+      </if>
+      <if test="packing != null">
+        Packing,
+      </if>
+      <if test="coupon != null">
+        Coupon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodid != null">
+        #{goodid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionpice != null">
+        #{promotionpice,jdbcType=REAL},
+      </if>
+      <if test="originalprice != null">
+        #{originalprice,jdbcType=REAL},
+      </if>
+      <if test="monthlysales != null">
+        #{monthlysales,jdbcType=INTEGER},
+      </if>
+      <if test="totalsales != null">
+        #{totalsales,jdbcType=INTEGER},
+      </if>
+      <if test="totalevaluate != null">
+        #{totalevaluate,jdbcType=INTEGER},
+      </if>
+      <if test="detailimg != null">
+        #{detailimg,jdbcType=VARCHAR},
+      </if>
+      <if test="flavor != null">
+        #{flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null">
+        #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="coupon != null">
+        #{coupon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddcs.domain.GoodInfo">
+    update goodinfo
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        Discount = #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionpice != null">
+        PromotionPice = #{promotionpice,jdbcType=REAL},
+      </if>
+      <if test="originalprice != null">
+        OriginalPrice = #{originalprice,jdbcType=REAL},
+      </if>
+      <if test="monthlysales != null">
+        MonthlySales = #{monthlysales,jdbcType=INTEGER},
+      </if>
+      <if test="totalsales != null">
+        TotalSales = #{totalsales,jdbcType=INTEGER},
+      </if>
+      <if test="totalevaluate != null">
+        TotalEvaluate = #{totalevaluate,jdbcType=INTEGER},
+      </if>
+      <if test="detailimg != null">
+        DetailImg = #{detailimg,jdbcType=VARCHAR},
+      </if>
+      <if test="flavor != null">
+        Flavor = #{flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null">
+        Packing = #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="coupon != null">
+        Coupon = #{coupon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GoodId = #{goodid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddcs.domain.GoodInfo">
+    update goodinfo
+    set Name = #{name,jdbcType=VARCHAR},
+      Discount = #{discount,jdbcType=VARCHAR},
+      PromotionPice = #{promotionpice,jdbcType=REAL},
+      OriginalPrice = #{originalprice,jdbcType=REAL},
+      MonthlySales = #{monthlysales,jdbcType=INTEGER},
+      TotalSales = #{totalsales,jdbcType=INTEGER},
+      TotalEvaluate = #{totalevaluate,jdbcType=INTEGER},
+      DetailImg = #{detailimg,jdbcType=VARCHAR},
+      Flavor = #{flavor,jdbcType=VARCHAR},
+      Packing = #{packing,jdbcType=VARCHAR},
+      Coupon = #{coupon,jdbcType=VARCHAR}
+    where GoodId = #{goodid,jdbcType=INTEGER}
+  </update>
+</mapper>

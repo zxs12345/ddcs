@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddcs.dao.ImgMapper">
+  <resultMap id="BaseResultMap" type="com.ddcs.domain.Img">
+    <id column="ImgId" jdbcType="INTEGER" property="imgid" />
+    <result column="SmallImg" jdbcType="VARCHAR" property="smallimg" />
+    <result column="MidImg" jdbcType="VARCHAR" property="midimg" />
+    <result column="BigImg" jdbcType="VARCHAR" property="bigimg" />
+    <result column="spId" jdbcType="INTEGER" property="spid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ImgId, SmallImg, MidImg, BigImg, spId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from img
+    where ImgId = #{imgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from img
+    where ImgId = #{imgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ddcs.domain.Img">
+    insert into img (ImgId, SmallImg, MidImg, 
+      BigImg, spId)
+    values (#{imgid,jdbcType=INTEGER}, #{smallimg,jdbcType=VARCHAR}, #{midimg,jdbcType=VARCHAR}, 
+      #{bigimg,jdbcType=VARCHAR}, #{spid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ddcs.domain.Img">
+    insert into img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imgid != null">
+        ImgId,
+      </if>
+      <if test="smallimg != null">
+        SmallImg,
+      </if>
+      <if test="midimg != null">
+        MidImg,
+      </if>
+      <if test="bigimg != null">
+        BigImg,
+      </if>
+      <if test="spid != null">
+        spId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imgid != null">
+        #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="smallimg != null">
+        #{smallimg,jdbcType=VARCHAR},
+      </if>
+      <if test="midimg != null">
+        #{midimg,jdbcType=VARCHAR},
+      </if>
+      <if test="bigimg != null">
+        #{bigimg,jdbcType=VARCHAR},
+      </if>
+      <if test="spid != null">
+        #{spid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddcs.domain.Img">
+    update img
+    <set>
+      <if test="smallimg != null">
+        SmallImg = #{smallimg,jdbcType=VARCHAR},
+      </if>
+      <if test="midimg != null">
+        MidImg = #{midimg,jdbcType=VARCHAR},
+      </if>
+      <if test="bigimg != null">
+        BigImg = #{bigimg,jdbcType=VARCHAR},
+      </if>
+      <if test="spid != null">
+        spId = #{spid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ImgId = #{imgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddcs.domain.Img">
+    update img
+    set SmallImg = #{smallimg,jdbcType=VARCHAR},
+      MidImg = #{midimg,jdbcType=VARCHAR},
+      BigImg = #{bigimg,jdbcType=VARCHAR},
+      spId = #{spid,jdbcType=INTEGER}
+    where ImgId = #{imgid,jdbcType=INTEGER}
+  </update>
+</mapper>
